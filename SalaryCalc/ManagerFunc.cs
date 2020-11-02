@@ -9,19 +9,17 @@ namespace SalaryCalc
     class ManagerFunc
     {
         public static void addPersonal()
-        {
-            //TODO: Функция перезаписывает новый файл а не создает дополнительную строку. Исправить.
+        {            
             Console.WriteLine();
             Console.Write("Введите имя нового сотрудника: ");
             var name = Console.ReadLine();
             Console.Write("Введите фамилию нового сотрудника: ");
             var secondName = Console.ReadLine();
             Console.Write("Введите должность нового сотрудника: \n" +
-                "\t 0 - Руководитель \n" +
-                "\t 1 - Штатный сотрудник  \n" +
-                "\t 2 - Фриланс \n");
+                "\t\t 0 - Руководитель \n" +
+                "\t\t 1 - Штатный сотрудник  \n" +
+                "\t\t 2 - Фриланс \n");
             int.TryParse(Console.ReadLine(), out int value);
-
             
 
             var person = new Person(name, secondName, (Position)value);
@@ -32,7 +30,7 @@ namespace SalaryCalc
             }
         }
 
-        public void addPersonal(string name, string secondName, Position position)
+        public static void addPersonal(string name, string secondName, Position position)
         {
             var person = new Person(name, secondName, position);
 
@@ -41,6 +39,25 @@ namespace SalaryCalc
                 file.Write(JsonSerializer.Serialize(person));
             }
         }
+
+
+        public static void getWorkInfo(DateTime EndDate)
+        {
+            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_HOURS_WORKER);
+
+            var timeNow = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+            
+
+            foreach (var item in listHoursWorked)
+            {
+                if (EndDate.CompareTo(item.workDay) == -1 || EndDate.CompareTo(item.workDay) == 0)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+        }
+
+       
 
     }
 }

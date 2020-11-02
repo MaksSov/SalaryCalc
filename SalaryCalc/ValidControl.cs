@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using System.IO;
+using System.Threading;
 
 namespace SalaryCalc
 {
@@ -58,8 +59,11 @@ namespace SalaryCalc
                 }
 
             }
-
+            Console.WriteLine("-------------------");
             Console.WriteLine("Сотрудник не найден");
+            Console.WriteLine();
+            Console.WriteLine("Возврат на начальную страницу");
+            Thread.Sleep(2000);
             return default(Person);
 
         }

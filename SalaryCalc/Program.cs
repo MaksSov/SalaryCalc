@@ -17,7 +17,10 @@ namespace SalaryCalc
 
             var menu = new MenuInterface();
 
-            menu.mainMenu(listPerson);
+            menu.loginMenu(listPerson);
+
+
+
 
         }
     }

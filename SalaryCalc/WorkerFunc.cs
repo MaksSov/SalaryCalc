@@ -31,7 +31,7 @@ namespace SalaryCalc
 
             var workDay = new HoursWorked { person = person, workDay = time, workHours = workHours, coments = coments };
 
-            using (var file = new StreamWriter(FilePath.LIST_HOURS_WORKER, true))
+            using (var file = new StreamWriter(FilePath.LIST_HOURS_WORKER, true, Encoding.UTF8))
             {
 
                 file.WriteLine(JsonSerializer.Serialize(workDay));
@@ -81,6 +81,8 @@ namespace SalaryCalc
 
             return totalSalary;
         }
+
+       
 
     }
 }
