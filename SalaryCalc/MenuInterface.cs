@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,9 +10,6 @@ namespace SalaryCalc
 {
     class MenuInterface
     {
-        
-        
-
         public void loginMenu(List<Person> listPerson)
         {
             Console.Clear();
@@ -37,10 +35,13 @@ namespace SalaryCalc
         {
             Console.Clear();
             Console.WriteLine($"");
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine($"Здравствуйте, {person.name}");
             Console.WriteLine($"");
-            Console.WriteLine($"Ваша роль: {person.position}");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"Ваша роль: {person.position}", ConsoleColor.Yellow);
             Console.WriteLine($"----------------------------------------");
+            Console.ForegroundColor = ConsoleColor.White;
             switch (person.position)
             {
                 case Position.Manager:
@@ -57,7 +58,6 @@ namespace SalaryCalc
             }
 
         }
-
 
         private void managerMenu(Person person)
         {
@@ -83,9 +83,8 @@ namespace SalaryCalc
                     break;
                 case 2:
                     ManagerFunc.addPersonal();
-                    Console.WriteLine("---------  Готово  ----------");
-                    Thread.Sleep(1000);
 
+                    done();
                     headMenu(person);
                     break;
                 case 3:
@@ -142,7 +141,6 @@ namespace SalaryCalc
 
         }
 
-
         private void workerMenu(Person person)
         {
             Console.Clear();
@@ -153,7 +151,7 @@ namespace SalaryCalc
                 "\t(3).Вернутся назад\n" +
                 "\t(4).Выход из программы");
             Console.Write("Ввод: ");
-            Console.WriteLine();
+            
 
             //TODO: Проверить ввод пользователя.
 
@@ -164,10 +162,11 @@ namespace SalaryCalc
             {
                 case 1:
                     WorkerFunc.addWorkTime(person);
+                    done();
                     break;
                 case 2:                    
-                    Console.WriteLine($"Количество отработанных часов: {WorkerFunc.getWorkTime(person)}");
-                    Console.WriteLine($"Заработная плата: {WorkerFunc.getSalary(person)} \n");
+                    Console.WriteLine($"Количество отработанных часов за месяц: {WorkerFunc.getWorkTime(person)}");
+                    Console.WriteLine($"Заработная плата за месяц: {WorkerFunc.getSalary(person)} \n");
                     Console.WriteLine("Для возврата нажмите любую клавишу...");
                     Console.ReadKey();
                     headMenu(person);
@@ -182,6 +181,7 @@ namespace SalaryCalc
             }
 
         }
+
         private void frilancerMenu(Person person)
         {
             Console.WriteLine(
@@ -210,7 +210,14 @@ namespace SalaryCalc
                     break;
                 default:
                     break;
-            }
+            }            
+
+        }
+
+        private void done()
+        {
+            Console.WriteLine("-----------------");
+            Thread.Sleep(2000);            
         }
 
     }

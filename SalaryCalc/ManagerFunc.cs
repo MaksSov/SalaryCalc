@@ -9,7 +9,10 @@ namespace SalaryCalc
     class ManagerFunc
     {
         public static void addPersonal()
-        {            
+        {
+
+            //TODO: Добавить проверку ввода данных
+
             Console.WriteLine();
             Console.Write("Введите имя нового сотрудника: ");
             var name = Console.ReadLine();
@@ -32,6 +35,7 @@ namespace SalaryCalc
 
         public static void addPersonal(string name, string secondName, Position position)
         {
+            //TODO: Добавить проверку ввода данных
             var person = new Person(name, secondName, position);
 
             using (var file = new StreamWriter(FilePath.LIST_EMPLOYEES, true))
@@ -43,6 +47,7 @@ namespace SalaryCalc
 
         public static void getWorkInfo(DateTime EndDate)
         {
+            
             var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_HOURS_WORKER);
 
             var timeNow = Convert.ToDateTime(DateTime.Now.ToShortDateString());

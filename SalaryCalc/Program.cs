@@ -20,8 +20,6 @@ namespace SalaryCalc
             menu.loginMenu(listPerson);
 
 
-
-
         }
     }
 }

@@ -41,6 +41,8 @@ namespace SalaryCalc
 
         public static int getWorkTime(Person person)
         {
+            //TODO: Добавить условие сортировки отчета за месяц
+
             var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_HOURS_WORKER);
 
             int totalWorkHour = 0;
@@ -59,6 +61,8 @@ namespace SalaryCalc
 
         public static int getSalary(Person person)
         {
+            //TODO: Добавить условие сортировки отчета за месяц
+
             var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_HOURS_WORKER);
 
             int totalWorkHour = 0;
