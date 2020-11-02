@@ -23,7 +23,13 @@ namespace SalaryCalc
 
             var workHours = int.Parse(Console.ReadLine());
 
-            var workDay = new HoursWorked { person = person, workDay = time, workHours = workHours };
+            Console.WriteLine("Добавьте коментарий о проделаной работе");
+
+            var coments = Console.ReadLine();
+
+
+
+            var workDay = new HoursWorked { person = person, workDay = time, workHours = workHours, coments = coments };
 
             using (var file = new StreamWriter(FilePath.LIST_HOURS_WORKER, true))
             {

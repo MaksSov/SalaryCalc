@@ -34,6 +34,7 @@ namespace SalaryCalc
                     workerMenu(loginPerson);
                     break;
                 case Position.Frilancer:
+                    frilancerMenu(loginPerson);
                     break;
                 default:
                     break;
@@ -106,6 +107,36 @@ namespace SalaryCalc
                     break;
             }
 
+        }
+        private void frilancerMenu(Person person)
+        {
+            Console.WriteLine(
+                "\tВыберите желаемое действие:\n" +
+                "\t(1).Добавить отработаные часы(не ранее чем за два дня от текущего времени)\n" +
+                "\t(2).Просмотреть отчет по отработаному времени и зарплате\n" +
+                "\t(3).Выход из программы");
+            Console.Write("Номер:");
+
+            //TODO: Проверить ввод пользователя.
+
+            var userChoise = Console.ReadLine();
+            int.TryParse(userChoise, out int value);
+
+            switch (value)
+            {
+                case 1:
+                    
+                    break;
+                case 2:
+                    Console.WriteLine($"Количество отработанных часов: ");
+                    Console.WriteLine($"Заработная плата: ");
+                    break;
+                case 3:
+
+                    break;
+                default:
+                    break;
+            }
         }
 
     }

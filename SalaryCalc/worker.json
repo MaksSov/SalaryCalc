@@ -1,3 +1,1 @@
-{"person":{"name":"Ivan","secondName":"Ivanov","position":1,"salary":120000},"workDay":"2020-10-12T00:00:00","workHours":2}
-{"person":{"name":"Ivan","secondName":"Ivanov","position":1,"salary":120000},"workDay":"2012-06-30T00:00:00","workHours":4}
-{"person":{"name":"Ivan","secondName":"Ivanov","position":1,"salary":120000},"workDay":"2020-04-23T00:00:00","workHours":3}
+{"person":{"name":"Ivan","secondName":"Ivanov","position":1,"salary":120000},"workDay":"2020-10-10T00:00:00","workHours":8,"coments":"\u0420\u0430\u0431\u043E\u0442\u0430\u043B \u043D\u0430\u0434 \u0444\u0438\u0447\u0435\u0439"}

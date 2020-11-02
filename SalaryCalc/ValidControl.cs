@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Text.Json;
+using System.IO;
 
 namespace SalaryCalc
 {
@@ -57,6 +58,7 @@ namespace SalaryCalc
                 }
 
             }
+
             Console.WriteLine("Сотрудник не найден");
             return default(Person);
 
@@ -68,6 +70,21 @@ namespace SalaryCalc
             {
                 return true;
             }
+            return false;
+        }
+
+        public static bool isFileEmployeedCreate()
+        {
+            if (!File.Exists(FilePath.LIST_EMPLOYEES))
+            {
+                Person person = new Person("admin", "admin", Position.Manager);
+                using (var file = new StreamWriter(FilePath.LIST_EMPLOYEES, true))
+                {
+                    file.WriteLine(JsonSerializer.Serialize(person));
+                }
+
+                return true;
+            }            
             return false;
         }
 

@@ -1,8 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.Text.Json;
 
 
 namespace SalaryCalc
@@ -12,7 +11,7 @@ namespace SalaryCalc
         static void Main(string[] args)
         {
 
-
+            ValidControl.isFileEmployeedCreate();
 
             List<Person> listPerson = LoadFromJson<Person>.getListJson(FilePath.LIST_EMPLOYEES);
 

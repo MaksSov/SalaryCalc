@@ -9,6 +9,7 @@ namespace SalaryCalc
         public Person person { get; set; }
         public DateTime workDay { get; set; }
         public int workHours { get; set; }
+        public string coments { get; set; }
 
     }
 }
