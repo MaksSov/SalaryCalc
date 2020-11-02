@@ -26,7 +26,7 @@ namespace SalaryCalc
 
             var person = new Person(name, secondName, (Position)value);
 
-            using (var file = new StreamWriter(FilePath.LIST_EMPLOYEES))
+            using (var file = new StreamWriter(FilePath.LIST_EMPLOYEES, true))
             {
                 file.Write(JsonSerializer.Serialize(person));
             }
@@ -36,7 +36,7 @@ namespace SalaryCalc
         {
             var person = new Person(name, secondName, position);
 
-            using (var file = new StreamWriter(FilePath.LIST_EMPLOYEES))
+            using (var file = new StreamWriter(FilePath.LIST_EMPLOYEES, true))
             {
                 file.Write(JsonSerializer.Serialize(person));
             }
