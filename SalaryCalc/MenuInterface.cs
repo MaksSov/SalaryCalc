@@ -6,20 +6,32 @@ namespace SalaryCalc
 {
     class MenuInterface
     {
-        public void mainMenu(Person person)
-        {
-            Console.WriteLine($"");
-            Console.WriteLine($"Здравствуйте, {person.name}");
-            Console.WriteLine($"");
-            Console.WriteLine($"Ваша роль: {person.position}");
 
-            switch (person.position)
+
+        public void mainMenu(List<Person> listPerson)
+        {
+
+            Console.WriteLine("Представьтесь пожалуйста");
+            Console.Write("Введите Имя: ");
+            var loginName = Console.ReadLine();
+
+            Console.Write("Введите Фамилию: ");
+            var loginSecondName = Console.ReadLine();
+
+            var loginPerson = ValidControl.getPerson(listPerson, loginName, loginSecondName);
+
+            Console.WriteLine($"");
+            Console.WriteLine($"Здравствуйте, {loginPerson.name}");
+            Console.WriteLine($"");
+            Console.WriteLine($"Ваша роль: {loginPerson.position}");
+
+            switch (loginPerson.position)
             {
                 case Position.Manager:
-                    managerMenu(person);
+                    managerMenu(loginPerson);
                     break;
                 case Position.Worker:
-                    workerMenu(person);
+                    workerMenu(loginPerson);
                     break;
                 case Position.Frilancer:
                     break;
@@ -64,7 +76,7 @@ namespace SalaryCalc
 
         }
 
-        private void workerMenu(Person perosn)
+        private void workerMenu(Person person)
         {
             Console.WriteLine(
                 "\tВыберите желаемое действие:\n" +
@@ -81,11 +93,14 @@ namespace SalaryCalc
             switch (value)
             {
                 case 1:
-                    WorkerFunc.addTime(perosn);
+                    WorkerFunc.addWorkTime(person);
                     break;
-                case 2:
+                case 2:                    
+                    Console.WriteLine($"Количество отработанных часов: {WorkerFunc.getWorkTime(person)}");
+                    Console.WriteLine($"Заработная плата: {WorkerFunc.getSalary(person)}");
                     break;
                 case 3:
+
                     break;
                 default:
                     break;

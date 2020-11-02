@@ -9,7 +9,7 @@ namespace SalaryCalc
     class WorkerFunc
     {
 
-        public static void addTime(Person person)
+        public static void addWorkTime(Person person)
         {
 
             //TODO:Добавить проверку ввода данных
@@ -32,5 +32,49 @@ namespace SalaryCalc
 
             }
         }
+
+        public static int getWorkTime(Person person)
+        {
+            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_HOURS_WORKER);
+
+            int totalWorkHour = 0;
+
+            foreach (HoursWorked item in listHoursWorked)
+            {
+                if (person.name == item.person.name && person.secondName == item.person.secondName)
+                {
+                    totalWorkHour += item.workHours;
+                }
+               
+            }
+
+            return totalWorkHour;
+        }
+
+        public static int getSalary(Person person)
+        {
+            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_HOURS_WORKER);
+
+            int totalWorkHour = 0;
+            
+
+            foreach (HoursWorked item in listHoursWorked)
+            {
+                if (person.name == item.person.name && person.secondName == item.person.secondName)
+                {
+                    totalWorkHour += item.workHours;
+                }
+            }
+
+            int totalSalary = totalWorkHour * (person.salary / 160);            
+
+            if (totalWorkHour > 160)
+            {
+                totalSalary += (totalWorkHour - 160) * (person.salary / 160);
+            }
+
+            return totalSalary;
+        }
+
     }
 }

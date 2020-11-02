@@ -6,24 +6,29 @@ using System.Text;
 
 namespace SalaryCalc
 {
-    class LoadFromJson
+    static class LoadFromJson
+        <T>
     {
-        public static List<Person> GetListEmployees()
+        public static List<T> getListJson(string filePath)
         {
-            List<Person> listPerson = new List<Person>();
+            List<T> listPerson = new List<T>();
 
-            using (var file = new StreamReader(FilePath.LIST_EMPLOYEES))
+            using (var file = new StreamReader(filePath))
             {
                 string line;
 
                 while ((line = file.ReadLine()) != null)
                 {
 
-                    listPerson.Add(JsonConvert.DeserializeObject<Person>(line));
+                    listPerson.Add(JsonConvert.DeserializeObject<T>(line));
                 }
             }
 
             return listPerson;
         }
+
+       
+       
+
     }
 }
