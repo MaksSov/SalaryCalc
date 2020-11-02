@@ -15,7 +15,7 @@ namespace SalaryCalc
             this.name = name;
             this.secondName = secondName;
             this.position = position;
-            salary = salary;
+            this.setDefaultSalary();
         }
 
 
@@ -28,31 +28,36 @@ namespace SalaryCalc
         public int salary
         {
             
-            set {
-
-                switch (this.position)
-                {
-                    case Position.Manager:
-                        Salary = 200000;
-                        break;
-
-                    case Position.Worker:
-                        Salary = 120000;
-                        break;
-
-                    case Position.Frilancer:
-                        Salary = 160000;
-                        break;
-
-                    default:
-                        Salary = 0;
-                        break;
-                }              
+            set
+            {
+                Salary = value;            
             }
 
             get
             {
                 return Salary;
+            }
+        }
+
+        private void setDefaultSalary()
+        {
+            switch (this.position)
+            {
+                case Position.Manager:
+                    Salary = 200000;
+                    break;
+
+                case Position.Worker:
+                    Salary = 120000;
+                    break;
+
+                case Position.Frilancer:
+                    Salary = 160000;
+                    break;
+
+                default:
+                    Salary = 0;
+                    break;
             }
         }
 

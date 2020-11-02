@@ -28,7 +28,7 @@ namespace SalaryCalc
 
             using (var file = new StreamWriter(FilePath.LIST_EMPLOYEES, true))
             {
-                file.Write(JsonSerializer.Serialize(person));
+                file.WriteLine(JsonSerializer.Serialize(person));
             }
         }
 

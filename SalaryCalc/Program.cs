@@ -19,9 +19,6 @@ namespace SalaryCalc
 
             menu.mainMenu(listPerson);
 
-
-
-
         }
     }
 }

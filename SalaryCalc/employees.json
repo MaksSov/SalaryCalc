@@ -1,2 +1,3 @@
-{"name":"admin","secondName":"admin","position":0,"salary":200000}
+{"name":"admin","secondName":"admin","position":0,"salary":0}
 {"name":"Ivan","secondName":"Ivanov","position":1,"salary":120000}
+{"name":"Petr","secondName":"Petrov","position":1,"salary":120000}

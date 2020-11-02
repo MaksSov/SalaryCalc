@@ -77,7 +77,11 @@ namespace SalaryCalc
         {
             if (!File.Exists(FilePath.LIST_EMPLOYEES))
             {
+                Console.WriteLine("Первый запуск программы создан базовый пользователь с именем и фамилией admin");
+
                 Person person = new Person("admin", "admin", Position.Manager);
+                person.salary = 0;
+
                 using (var file = new StreamWriter(FilePath.LIST_EMPLOYEES, true))
                 {
                     file.WriteLine(JsonSerializer.Serialize(person));
