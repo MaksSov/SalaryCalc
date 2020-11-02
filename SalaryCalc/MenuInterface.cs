@@ -8,12 +8,18 @@ namespace SalaryCalc
     {
         public void mainMenu(Person person)
         {
+            Console.WriteLine($"");
+            Console.WriteLine($"Здравствуйте, {person.name}");
+            Console.WriteLine($"");
+            Console.WriteLine($"Ваша роль: {person.position}");
+
             switch (person.position)
             {
                 case Position.Manager:
                     managerMenu(person);
                     break;
                 case Position.Worker:
+                    workerMenu(person);
                     break;
                 case Position.Frilancer:
                     break;
@@ -24,10 +30,6 @@ namespace SalaryCalc
 
         private void managerMenu(Person person)
         {
-            Console.WriteLine($"");
-            Console.WriteLine($"Здравствуйте, {person.name}");
-            Console.WriteLine($"");
-            Console.WriteLine($"Ваша роль: {person.position}");
             Console.WriteLine(
                 "\tВыберите желаемое действие:\n" +
                 "\t(1).Добавить сотрудника\n" +
@@ -55,6 +57,35 @@ namespace SalaryCalc
                     break;
                 case 5:
                     
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+        private void workerMenu(Person perosn)
+        {
+            Console.WriteLine(
+                "\tВыберите желаемое действие:\n" +
+                "\t(1).Добавить отработаные часы\n" +
+                "\t(2).Просмотреть отчет по отработаному времени и зарплате\n" +
+                "\t(3).Выход из программы");
+            Console.Write("Номер:");
+
+            //TODO: Проверить ввод пользователя.
+
+            var userChoise = Console.ReadLine();
+            int.TryParse(userChoise, out int value);
+
+            switch (value)
+            {
+                case 1:
+                    WorkerFunc.addTime(perosn);
+                    break;
+                case 2:
+                    break;
+                case 3:
                     break;
                 default:
                     break;

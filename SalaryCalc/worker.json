@@ -1,0 +1,3 @@
+{"person":{"name":"Ivan","secondName":"Ivanov","position":1,"salary":120000},"workDay":"2020-10-12T00:00:00","workHours":2}
+{"person":{"name":"Ivan","secondName":"Ivanov","position":1,"salary":120000},"workDay":"2012-06-30T00:00:00","workHours":4}
+{"person":{"name":"Ivan","secondName":"Ivanov","position":1,"salary":120000},"workDay":"2020-04-23T00:00:00","workHours":3}

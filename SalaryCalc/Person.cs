@@ -18,10 +18,10 @@ namespace SalaryCalc
             salary = salary;
         }
 
+
         public string name { get; set; }
         public string secondName { get; set; }
-        public Position position { get; set; }
-        public DateTime workTime { get; set; }
+        public Position position { get; set; }       
         
         private int Salary;
      
