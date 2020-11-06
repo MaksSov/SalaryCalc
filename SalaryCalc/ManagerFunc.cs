@@ -62,7 +62,20 @@ namespace SalaryCalc
             }
         }
 
-       
+        public static void getWorkInfo(DateTime StartDate, DateTime EndDate)
+        {
+
+            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_HOURS_WORKER);
+
+            foreach (var item in listHoursWorked)
+            {
+                if (StartDate <= item.workDay && EndDate >= item.workDay )
+                {
+                    Console.WriteLine(item);
+                }
+            }
+        }
+
 
     }
 }

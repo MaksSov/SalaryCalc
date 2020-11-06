@@ -93,47 +93,10 @@ namespace SalaryCalc
                 case 4:
                     break;
                 case 5:
-                    
+
                     break;
                 case 6:
                     Environment.Exit(0);
-                    break;
-                default:
-                    break;
-            }
-
-        }
-
-        private void menuPeriod(Person person)
-        {
-            Console.WriteLine(
-                "\tВыберите желаемый период:\n" +
-                "\t(1).День\n" +
-                "\t(2).Неделя\n" +
-                "\t(3).Месяц\n" +
-                "\t(4).Указать период\n" +
-                "\t(5).Выход из программы\n");
-            Console.Write("Ввод: ");
-            Console.WriteLine();
-
-            //TODO: Проверить ввод пользователя.
-
-            var userChoise = Console.ReadLine();
-            int.TryParse(userChoise, out int value);
-
-            switch (value)
-            {
-                case 1:
-                    Console.WriteLine();
-                    ManagerFunc.getWorkInfo(Convert.ToDateTime(DateTime.Now.ToShortDateString()));                    
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                case 5:
                     break;
                 default:
                     break;
@@ -202,8 +165,7 @@ namespace SalaryCalc
                     
                     break;
                 case 2:
-                    Console.WriteLine($"Количество отработанных часов: ");
-                    Console.WriteLine($"Заработная плата: ");
+
                     break;
                 case 3:
 
@@ -211,6 +173,69 @@ namespace SalaryCalc
                 default:
                     break;
             }            
+
+        }
+
+        private void menuPeriod(Person person)
+        {
+            Console.WriteLine(
+                "\tВыберите желаемый период:\n" +
+                "\t(1).День\n" +
+                "\t(2).Неделя\n" +
+                "\t(3).Месяц\n" +
+                "\t(4).Указать период\n" +
+                "\t(5).Выход из программы\n");
+            Console.Write("Ввод: ");
+
+            //TODO: Проверить ввод пользователя.
+
+            var userChoise = Console.ReadLine();
+            int.TryParse(userChoise, out int value);
+
+            switch (value)
+            {
+                case 1:
+                    Console.WriteLine();
+                    ManagerFunc.getWorkInfo(Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                    break;
+                case 2:
+                    var weak = new TimeSpan(7, 0, 0, 0);
+                    var weakAgo = Convert.ToDateTime(DateTime.Now - weak);
+                    ManagerFunc.getWorkInfo(weakAgo);
+                    break;
+                case 3:
+                    var month = new TimeSpan(DateTime.Now.Day, 0, 0, 0);
+                    var monthAgo = Convert.ToDateTime(DateTime.Now - month);
+                    ManagerFunc.getWorkInfo(monthAgo);
+                    break;
+                case 4:
+                    getUserPeriod(out DateTime StartTime,out DateTime EndTime);
+                    ManagerFunc.getWorkInfo(StartTime, EndTime);
+                    break;               
+                case 5:
+                    Environment.Exit(0);
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+        private void getUserPeriod(out DateTime StartTime, out DateTime EndTime)
+        {
+            Console.Write("Укажите дату начала периода в формате дд.мм.гггг: ");
+
+            //TODO: Проверить ввод пользователя.
+
+            StartTime = Convert.ToDateTime(Console.ReadLine());
+
+            Console.Write("Укажите дату окончания периода в формате дд.мм.гггг: ");
+
+            //TODO: Проверить ввод пользователя.
+
+            EndTime = Convert.ToDateTime(Console.ReadLine());
+
+            Console.WriteLine();
 
         }
 
