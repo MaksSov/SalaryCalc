@@ -48,6 +48,16 @@ namespace SalaryCalc
             return false;
         }
 
+        public static Person getPerson()
+        {
+            List<Person> listPerson = LoadFromJson<Person>.getListJson(FilePath.LIST_EMPLOYEES);
+            Console.Write("Введите Имя: ");
+            var loginName = Console.ReadLine();
+            Console.Write("Введите Фамилию: ");
+            var loginSecondName = Console.ReadLine();
+            return ValidControl.getPerson(listPerson, loginName, loginSecondName);            
+
+        }
 
         public static Person getPerson(List<Person> listPerson, string name, string secondName)
         {

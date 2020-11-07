@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace SalaryCalc
 {
-    class ManagerFunc
+    class ManagerFunc : WorkerFunc
     {
         public static void addPersonal()
         {
@@ -44,18 +44,53 @@ namespace SalaryCalc
             }
         }
 
+        public static void getWorkInfo()
+        {
+
+            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_HOURS_WORKER);
+
+            foreach (var item in listHoursWorked)
+            {               
+                Console.WriteLine(item);                
+            }
+        }
+
+        public static void getWorkInfo(Person person)
+        {
+
+            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_HOURS_WORKER);
+
+            foreach (var item in listHoursWorked)
+            {
+                if (person == item.person)
+                {
+                    Console.WriteLine(item);
+                }                
+            }
+        }
 
         public static void getWorkInfo(DateTime EndDate)
         {
-            
-            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_HOURS_WORKER);
 
-            var timeNow = Convert.ToDateTime(DateTime.Now.ToShortDateString());
-            
+            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_HOURS_WORKER);
 
             foreach (var item in listHoursWorked)
             {
                 if (EndDate.CompareTo(item.workDay) == -1 || EndDate.CompareTo(item.workDay) == 0)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+        }
+
+        public static void getWorkInfo(DateTime EndDate, Person person)
+        {
+            
+            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_HOURS_WORKER);
+
+            foreach (var item in listHoursWorked)
+            {
+                if (EndDate.CompareTo(item.workDay) == -1 || EndDate.CompareTo(item.workDay) == 0 && person == item.person)
                 {
                     Console.WriteLine(item);
                 }
@@ -76,6 +111,19 @@ namespace SalaryCalc
             }
         }
 
+        public static void getWorkInfo(DateTime StartDate, DateTime EndDate , Person person)
+        {
+
+            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_HOURS_WORKER);
+
+            foreach (var item in listHoursWorked)
+            {
+                if (StartDate <= item.workDay && EndDate >= item.workDay && person == item.person)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+        }
 
     }
 }

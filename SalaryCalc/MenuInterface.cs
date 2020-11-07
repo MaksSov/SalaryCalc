@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+
 
 
 namespace SalaryCalc
@@ -15,13 +12,7 @@ namespace SalaryCalc
             Console.Clear();
             Console.WriteLine("Представьтесь пожалуйста");
 
-            Console.Write("Введите Имя: ");
-            var loginName = Console.ReadLine();
-
-            Console.Write("Введите Фамилию: ");
-            var loginSecondName = Console.ReadLine();
-
-            var loginPerson = ValidControl.getPerson(listPerson, loginName, loginSecondName);
+            var loginPerson = ValidControl.getPerson();
 
             if(loginPerson == null)
             {
@@ -63,12 +54,11 @@ namespace SalaryCalc
         {
             Console.WriteLine(
                 "\tВыберите желаемое действие:\n" +
-                "\t(1).Проверить собственый отчет\n" +
+                "\t(1).Работа с собственным отчетом\n" +
                 "\t(2).Добавить сотрудника\n" +
                 "\t(3).Просмотреть отчет по всем сотрудникам за период\n" +
                 "\t(4).Просмотреть отчет по конкретному сотруднику за период\n" +
-                "\t(5).Добавить часы работы\n" +
-                "\t(6).Выход из программы\n");
+                "\t(5).Выход из программы\n");
             Console.Write("Ввод: ");
 
             //TODO: Проверить ввод пользователя.
@@ -88,14 +78,13 @@ namespace SalaryCalc
                     headMenu(person);
                     break;
                 case 3:
-                    menuPeriod(person);
+                    menuPeriodAllPerson(person);
                     break;
                 case 4:
+                    var userPerson = ValidControl.getPerson();
+                    menuPeriod(person , userPerson);                    
                     break;
                 case 5:
-
-                    break;
-                case 6:
                     Environment.Exit(0);
                     break;
                 default:
@@ -110,7 +99,7 @@ namespace SalaryCalc
             Console.WriteLine(
                 "\tВыберите желаемое действие:\n" +
                 "\t(1).Добавить отработаные часы\n" +
-                "\t(2).Просмотреть отчет по отработаному времени и зарплате\n" +
+                "\t(2).Просмотреть отчет по отработаному времени и зарплате за месяц\n" +
                 "\t(3).Вернутся назад\n" +
                 "\t(4).Выход из программы");
             Console.Write("Ввод: ");
@@ -126,6 +115,7 @@ namespace SalaryCalc
                 case 1:
                     WorkerFunc.addWorkTime(person);
                     done();
+                    headMenu(person);
                     break;
                 case 2:                    
                     Console.WriteLine($"Количество отработанных часов за месяц: {WorkerFunc.getWorkTime(person)}");
@@ -135,9 +125,11 @@ namespace SalaryCalc
                     headMenu(person);
                     break;
                 case 3:
-                    headMenu(person);
+                    List<Person> listPerson = LoadFromJson<Person>.getListJson(FilePath.LIST_EMPLOYEES);
+                    loginMenu(listPerson);
                     break;
-                case 4:                    
+                case 4:
+                    Environment.Exit(0);
                     break;
                 default:
                     break;
@@ -176,7 +168,7 @@ namespace SalaryCalc
 
         }
 
-        private void menuPeriod(Person person)
+        private void menuPeriodAllPerson(Person person)
         {
             Console.WriteLine(
                 "\tВыберите желаемый период:\n" +
@@ -184,7 +176,67 @@ namespace SalaryCalc
                 "\t(2).Неделя\n" +
                 "\t(3).Месяц\n" +
                 "\t(4).Указать период\n" +
-                "\t(5).Выход из программы\n");
+                "\t(5).За все время\n" +
+                "\t(6).Выход из программы\n");
+            Console.Write("Ввод: ");
+            
+            //TODO: Проверить ввод пользователя.
+
+            var userChoise = Console.ReadLine();            
+            int.TryParse(userChoise, out int value);
+            Console.WriteLine();
+
+            switch (value)
+            {
+                case 1:                    
+                    ManagerFunc.getWorkInfo(Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                    done();
+                    headMenu(person);
+                    break;
+                case 2:
+                    var weak = new TimeSpan(7, 0, 0, 0);
+                    var weakAgo = Convert.ToDateTime(DateTime.Now - weak);
+                    ManagerFunc.getWorkInfo(weakAgo);
+                    done();
+                    headMenu(person);
+                    break;
+                case 3:
+                    var month = new TimeSpan(DateTime.Now.Day, 0, 0, 0);
+                    var monthAgo = Convert.ToDateTime(DateTime.Now - month);
+                    ManagerFunc.getWorkInfo(monthAgo);
+                    done();
+                    headMenu(person);
+                    break;
+                case 4:
+                    getUserPeriod(out DateTime StartTime,out DateTime EndTime);
+                    ManagerFunc.getWorkInfo(StartTime, EndTime);
+                    done();
+                    headMenu(person);
+                    break;
+                case 5:
+                    ManagerFunc.getWorkInfo();
+                    done();
+                    headMenu(person);
+                    break;
+                case 6:
+                    Environment.Exit(0);
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+        private void menuPeriod(Person person, Person userPerson)
+        {
+            Console.WriteLine(
+                 "\tВыберите желаемый период:\n" +
+                "\t(1).День\n" +
+                "\t(2).Неделя\n" +
+                "\t(3).Месяц\n" +
+                "\t(4).Указать период\n" +
+                "\t(5).За все время\n" +
+                "\t(6).Выход из программы\n");
             Console.Write("Ввод: ");
 
             //TODO: Проверить ввод пользователя.
@@ -196,23 +248,36 @@ namespace SalaryCalc
             {
                 case 1:
                     Console.WriteLine();
-                    ManagerFunc.getWorkInfo(Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                    ManagerFunc.getWorkInfo(Convert.ToDateTime(DateTime.Now.ToShortDateString()), userPerson);
+                    done();
+                    headMenu(person);
                     break;
                 case 2:
                     var weak = new TimeSpan(7, 0, 0, 0);
                     var weakAgo = Convert.ToDateTime(DateTime.Now - weak);
-                    ManagerFunc.getWorkInfo(weakAgo);
+                    ManagerFunc.getWorkInfo(weakAgo, userPerson);
+                    done();
+                    headMenu(person);
                     break;
                 case 3:
                     var month = new TimeSpan(DateTime.Now.Day, 0, 0, 0);
                     var monthAgo = Convert.ToDateTime(DateTime.Now - month);
-                    ManagerFunc.getWorkInfo(monthAgo);
+                    ManagerFunc.getWorkInfo(monthAgo, userPerson);
+                    done();
+                    headMenu(person);
                     break;
                 case 4:
-                    getUserPeriod(out DateTime StartTime,out DateTime EndTime);
-                    ManagerFunc.getWorkInfo(StartTime, EndTime);
-                    break;               
+                    getUserPeriod(out DateTime StartTime, out DateTime EndTime);
+                    ManagerFunc.getWorkInfo(StartTime, EndTime, userPerson);
+                    done();
+                    headMenu(person);
+                    break;
                 case 5:
+                    ManagerFunc.getWorkInfo(userPerson);
+                    done();
+                    headMenu(person);
+                    break;
+                case 6:
                     Environment.Exit(0);
                     break;
                 default:
@@ -242,7 +307,8 @@ namespace SalaryCalc
         private void done()
         {
             Console.WriteLine("-----------------");
-            Thread.Sleep(2000);            
+            Console.WriteLine("Нажмите любую кнопку...");
+            Console.ReadKey();
         }
 
     }
