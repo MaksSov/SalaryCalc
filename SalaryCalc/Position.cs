@@ -9,6 +9,6 @@ namespace SalaryCalc
     {
         Manager = 0,
         Worker = 1,
-        Frilancer = 2
+        Freelance = 2
     }
 }

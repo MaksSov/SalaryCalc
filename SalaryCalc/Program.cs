@@ -11,7 +11,7 @@ namespace SalaryCalc
         static void Main(string[] args)
         {
 
-            ValidControl.isFileEmployeedCreate();
+            ValidControl.fileEmployeedCreate();
 
             List<Person> listPerson = LoadFromJson<Person>.getListJson(FilePath.LIST_EMPLOYEES);
 

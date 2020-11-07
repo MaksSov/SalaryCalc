@@ -87,12 +87,13 @@ namespace SalaryCalc
             return false;
         }
 
-        public static bool isFileEmployeedCreate()
+        public static void fileEmployeedCreate()
         {
             if (!File.Exists(FilePath.LIST_EMPLOYEES))
             {
                 Console.WriteLine("Первый запуск программы создан базовый пользователь с именем и фамилией admin");
-
+                Console.WriteLine("Нажмите любую клавишу для продолжения...");
+                Console.ReadKey();
                 Person person = new Person("admin", "admin", Position.Manager);
                 person.salary = 0;
 
@@ -100,10 +101,22 @@ namespace SalaryCalc
                 {
                     file.WriteLine(JsonSerializer.Serialize(person));
                 }
-
-                return true;
+                
             }            
-            return false;
+            
+        }
+
+        public static bool isFileCreate(string path)
+        {
+            if (!File.Exists(path))
+            {
+                Console.WriteLine("Файл еще не создан");
+                Console.WriteLine("Нажмите любую клавишу для продолжения...");
+                Console.ReadKey();
+                
+                return false;
+            }
+            return true;
         }
 
     }

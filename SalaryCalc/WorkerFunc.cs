@@ -12,44 +12,53 @@ namespace SalaryCalc
         public static void addWorkTime(Person person)
         {
 
+
             //TODO:Добавить проверку ввода данных
 
             Console.WriteLine("Введите дату в формате дд.мм.гггг");
-            var userTime = Console.ReadLine();
 
-            bool parseDateTime = DateTime.TryParse(userTime, out DateTime time);
+            var userTime = Convert.ToDateTime(Console.ReadLine());
+            var month = new TimeSpan(DateTime.Now.Day, 0, 0, 0);
+            var twoDaysAgo = Convert.ToDateTime(DateTime.Now - month);
 
-            Console.WriteLine("Введите количетсво отработанных часов: ");
-
-            var workHours = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Добавьте коментарий о проделаной работе");
-
-            var coments = Console.ReadLine();
-
-
-
-            var workDay = new HoursWorked { person = person, workDay = time, workHours = workHours, coments = coments };
-
-            using (var file = new StreamWriter(FilePath.LIST_HOURS_WORKER, true, Encoding.UTF8))
+            if (userTime > twoDaysAgo)
             {
+                Console.WriteLine("Введите количетсво отработанных часов: ");
 
-                file.WriteLine(JsonSerializer.Serialize(workDay));
+                var workHours = int.Parse(Console.ReadLine());
 
+                Console.WriteLine("Добавьте коментарий о проделаной работе");
+
+                var coments = Console.ReadLine();
+
+
+
+                var workDay = new HoursWorked { person = person, workDay = userTime, workHours = workHours, coments = coments };
+
+                using (var file = new StreamWriter(FilePath.LIST_EMPLOYEES_REPORT, true, Encoding.UTF8))
+                {
+
+                    file.WriteLine(JsonSerializer.Serialize(workDay));
+
+                }
             }
+
+            else{Console.WriteLine("Вы ввели неправильную дату. Дата должна быть текущего месяца");            }
+
         }
 
         public static int getWorkTime(Person person)
         {
-            //TODO: Добавить условие сортировки отчета за месяц
+            var month = new TimeSpan(DateTime.Now.Day, 0, 0, 0);
+            var monthAgo = Convert.ToDateTime(DateTime.Now - month);
 
-            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_HOURS_WORKER);
+            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_EMPLOYEES_REPORT);
 
             int totalWorkHour = 0;
 
             foreach (HoursWorked item in listHoursWorked)
             {
-                if (person.name == item.person.name && person.secondName == item.person.secondName)
+                if (person.name == item.person.name && person.secondName == item.person.secondName && item.workDay > monthAgo)
                 {
                     totalWorkHour += item.workHours;
                 }
@@ -61,16 +70,17 @@ namespace SalaryCalc
 
         public static int getSalary(Person person)
         {
-            //TODO: Добавить условие сортировки отчета за месяц
+            var month = new TimeSpan(DateTime.Now.Day, 0, 0, 0);
+            var monthAgo = Convert.ToDateTime(DateTime.Now - month);
 
-            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_HOURS_WORKER);
+            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_EMPLOYEES_REPORT);
 
             int totalWorkHour = 0;
             
 
             foreach (HoursWorked item in listHoursWorked)
             {
-                if (person.name == item.person.name && person.secondName == item.person.secondName)
+                if (person.name == item.person.name && person.secondName == item.person.secondName && item.workDay > monthAgo)
                 {
                     totalWorkHour += item.workHours;
                 }

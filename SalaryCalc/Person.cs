@@ -51,7 +51,7 @@ namespace SalaryCalc
                     Salary = 120000;
                     break;
 
-                case Position.Frilancer:
+                case Position.Freelance:
                     Salary = 160000;
                     break;
 

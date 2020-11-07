@@ -47,32 +47,38 @@ namespace SalaryCalc
         public static void getWorkInfo()
         {
 
-            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_HOURS_WORKER);
+            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_EMPLOYEES_REPORT);
 
             foreach (var item in listHoursWorked)
             {               
                 Console.WriteLine(item);                
             }
+
         }
 
         public static void getWorkInfo(Person person)
         {
 
-            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_HOURS_WORKER);
+            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_EMPLOYEES_REPORT);
 
             foreach (var item in listHoursWorked)
             {
                 if (person == item.person)
                 {
                     Console.WriteLine(item);
-                }                
+                }
+                else
+                {
+                    Console.WriteLine("Нет данных");
+                    Console.WriteLine();
+                }
             }
         }
 
         public static void getWorkInfo(DateTime EndDate)
         {
 
-            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_HOURS_WORKER);
+            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_EMPLOYEES_REPORT);
 
             foreach (var item in listHoursWorked)
             {
@@ -80,13 +86,18 @@ namespace SalaryCalc
                 {
                     Console.WriteLine(item);
                 }
+                else
+                {
+                    Console.WriteLine("Нет данных");
+                    Console.WriteLine();
+                }
             }
         }
 
         public static void getWorkInfo(DateTime EndDate, Person person)
         {
             
-            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_HOURS_WORKER);
+            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_EMPLOYEES_REPORT);
 
             foreach (var item in listHoursWorked)
             {
@@ -94,13 +105,18 @@ namespace SalaryCalc
                 {
                     Console.WriteLine(item);
                 }
+                else
+                {
+                    Console.WriteLine("Нет данных");
+                    Console.WriteLine();
+                }
             }
         }
 
         public static void getWorkInfo(DateTime StartDate, DateTime EndDate)
         {
 
-            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_HOURS_WORKER);
+            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_EMPLOYEES_REPORT);
 
             foreach (var item in listHoursWorked)
             {
@@ -108,19 +124,29 @@ namespace SalaryCalc
                 {
                     Console.WriteLine(item);
                 }
+                else
+                {
+                    Console.WriteLine("Нет данных");
+                    Console.WriteLine();
+                }
             }
         }
 
         public static void getWorkInfo(DateTime StartDate, DateTime EndDate , Person person)
         {
 
-            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_HOURS_WORKER);
+            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_EMPLOYEES_REPORT);
 
             foreach (var item in listHoursWorked)
             {
                 if (StartDate <= item.workDay && EndDate >= item.workDay && person == item.person)
                 {
                     Console.WriteLine(item);
+                }
+                else
+                {
+                    Console.WriteLine("Нет данных");
+                    Console.WriteLine();
                 }
             }
         }
