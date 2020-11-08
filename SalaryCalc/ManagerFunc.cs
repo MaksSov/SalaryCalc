@@ -46,13 +46,11 @@ namespace SalaryCalc
 
         public static void GetWorkInfo()
         {
-            var listHoursWorked = LoadFromJson<HoursWorked>.GetListJson(FilePath.LIST_EMPLOYEES_REPORT);
-
+            var listHoursWorked = LoadFromJson<HoursWorked>.GetListJson(FilePath.LIST_EMPLOYEES_REPORT);            
             foreach (var item in listHoursWorked)
             {               
-                Console.WriteLine(item);                
-            }
-
+                Console.WriteLine(item);
+            }            
         }
 
         public static void GetWorkInfo(Person person)
@@ -134,8 +132,7 @@ namespace SalaryCalc
         public static void GetWorkInfo(DateTime StartDate, DateTime EndDate , Person person)
         {
 
-            var listHoursWorked = LoadFromJson<HoursWorked>.GetListJson(FilePath.LIST_EMPLOYEES_REPORT);
-
+            var listHoursWorked = LoadFromJson<HoursWorked>.GetListJson(FilePath.LIST_EMPLOYEES_REPORT);            
             foreach (var item in listHoursWorked)
             {
                 if (StartDate <= item.workDay && EndDate >= item.workDay && person == item.person)
@@ -148,6 +145,50 @@ namespace SalaryCalc
                     Console.WriteLine();
                 }
             }
+        }
+
+        public static new int GetSalary(Person person)
+        {
+            var month = new TimeSpan(DateTime.Now.Day, 0, 0, 0);
+            var monthAgo = Convert.ToDateTime(DateTime.Now - month);
+            var listHoursWorked = LoadFromJson<HoursWorked>.GetListJson(FilePath.LIST_EMPLOYEES_REPORT);
+            int totalWorkHour = 0;
+
+            foreach (HoursWorked item in listHoursWorked)
+            {
+                if (person.name == item.person.name && person.secondName == item.person.secondName && item.workDay > monthAgo)
+                {
+                    totalWorkHour += item.workHours;
+                }
+            }
+
+            int totalSalary = totalWorkHour * (person.salary / 160);
+
+            if (totalWorkHour > 160)
+            {
+                totalSalary += (totalWorkHour - 160) * (20000 / 160 * 8);
+            }
+
+            return totalSalary;
+        }
+
+        public static int GetTotalSalary()
+        {
+            var listHoursWorked = LoadFromJson<Person>.GetListJson(FilePath.LIST_EMPLOYEES);
+            var totalSalary = 0;
+            foreach (var item in listHoursWorked)
+            {
+                if (item.position == Position.Manager)
+                {
+                    totalSalary += ManagerFunc.GetSalary(item);
+                }
+                else
+                {
+                    totalSalary += WorkerFunc.GetSalary(item);
+                }
+                
+            }
+            return totalSalary;
         }
 
     }

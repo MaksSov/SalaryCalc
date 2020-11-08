@@ -10,16 +10,10 @@ namespace SalaryCalc
     {
         static void Main(string[] args)
         {
-
             ValidControl.CreatedFileEmployees();
-
             List<Person> listPerson = LoadFromJson<Person>.GetListJson(FilePath.LIST_EMPLOYEES);
-
             var menu = new MenuInterface();
-
             menu.LoginMenu(listPerson);
-
-            
 
 
         }

@@ -51,8 +51,9 @@ namespace SalaryCalc
                 "\t(2).Добавить сотрудника\n" +
                 "\t(3).Просмотреть отчет по всем сотрудникам за период\n" +
                 "\t(4).Просмотреть отчет по конкретному сотруднику за период\n" +
-                "\t(5).Сменить пользователя\n" +
-                "\t(6).Выход из программы\n");
+                "\t(5).Получить итоговую сумму по зарплате всех сотрудников за месяц\n" +
+                "\t(6).Сменить пользователя\n" +
+                "\t(7).Выход из программы\n");
             Console.Write("Ввод: ");
 
             //TODO: Проверить ввод пользователя.
@@ -90,10 +91,16 @@ namespace SalaryCalc
                     TopMenu(person);
                     break;
                 case 5:
-                    List<Person> listPerson = LoadFromJson<Person>.GetListJson(FilePath.LIST_EMPLOYEES);
-                    LoginMenu(listPerson);
+                    Console.WriteLine($"Итоговая сумма к выплатам: {ManagerFunc.GetTotalSalary()}р.");
+                    Done();
+                    TopMenu(person);
                     break;
                 case 6:
+                    List<Person> listPerson = LoadFromJson<Person>.GetListJson(FilePath.LIST_EMPLOYEES);
+                    LoginMenu(listPerson);
+                 
+                    break;
+                case 7:
                     Environment.Exit(0);
                     break;
                 default:
