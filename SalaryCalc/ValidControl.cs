@@ -63,8 +63,8 @@ namespace SalaryCalc
             Console.WriteLine("-------------------");
             Console.WriteLine("Сотрудник не найден");
             Console.WriteLine();
-            Console.WriteLine("Возврат на начальную страницу");
-            Thread.Sleep(2000);
+            Console.WriteLine("Нажмите любую клавишу для вовзравта...");
+            Console.ReadKey();
             return default(Person);
 
         }

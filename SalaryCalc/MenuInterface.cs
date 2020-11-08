@@ -81,7 +81,11 @@ namespace SalaryCalc
                     if (ValidControl.IsFileCreate(FilePath.LIST_EMPLOYEES_REPORT))
                     {
                         var userPerson = ValidControl.GetPerson();
-                        MenuPeriod(person, userPerson);
+                        if(userPerson != null)
+                        {
+                            MenuPeriod(person, userPerson);
+                        }
+                        TopMenu(person);
                     }
                     TopMenu(person);
                     break;

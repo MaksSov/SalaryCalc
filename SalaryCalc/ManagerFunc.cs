@@ -62,7 +62,7 @@ namespace SalaryCalc
 
             foreach (var item in listHoursWorked)
             {
-                if (person == item.person)
+                if (person.name == item.person.name && person.secondName == item.person.secondName)
                 {
                     Console.WriteLine(item);
                 }
