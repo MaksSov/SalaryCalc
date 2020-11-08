@@ -7,34 +7,34 @@ namespace SalaryCalc
 {
     class MenuInterface
     {
-        public void loginMenu(List<Person> listPerson)
+        public void LoginMenu(List<Person> listPerson)
         {
             Console.Clear();
             Console.WriteLine("Представьтесь пожалуйста");
 
-            var loginPerson = ValidControl.getPerson();
+            var loginPerson = ValidControl.GetPerson();
 
             if(loginPerson == null)
             {
-                loginMenu(listPerson);
+                LoginMenu(listPerson);
             }
 
-            topMenu(loginPerson);            
+            TopMenu(loginPerson);            
 
         }
-        public void topMenu(Person person)
+        public void TopMenu(Person person)
         {
-            headMenu(person);
+            HeadMenu(person);
             switch (person.position)
             {
                 case Position.Manager:
-                    managerMenu(person);
+                    ManagerMenu(person);
                     break;
                 case Position.Worker:
-                    workerMenu(person);
+                    WorkerMenu(person);
                     break;
                 case Position.Freelance:
-                    freelancerMenu(person);
+                    FreelancerMenu(person);
                     break;
                 default:
                     break;
@@ -42,9 +42,9 @@ namespace SalaryCalc
 
         }
 
-        private void managerMenu(Person person)
+        private void ManagerMenu(Person person)
         {
-            headMenu(person);
+            HeadMenu(person);
             Console.WriteLine(
                 "\tВыберите желаемое действие:\n" +
                 "\t(1).Работа с собственным отчетом\n" +
@@ -63,31 +63,31 @@ namespace SalaryCalc
             switch (value)
             {
                 case 1:
-                    workerMenu(person);
+                    WorkerMenu(person);
                     break;
                 case 2:
-                    ManagerFunc.addPersonal();
-                    done();
-                    topMenu(person);
+                    ManagerFunc.AddPersonal();
+                    Done();
+                    TopMenu(person);
                     break;
                 case 3:
-                    if (ValidControl.isFileCreate(FilePath.LIST_EMPLOYEES_REPORT))
+                    if (ValidControl.IsFileCreate(FilePath.LIST_EMPLOYEES_REPORT))
                     {                        
-                        menuPeriodAllPerson(person);
+                        MenuPeriodAllPerson(person);
                     }                    
-                    topMenu(person);
+                    TopMenu(person);
                     break;
                 case 4:
-                    if (ValidControl.isFileCreate(FilePath.LIST_EMPLOYEES_REPORT))
+                    if (ValidControl.IsFileCreate(FilePath.LIST_EMPLOYEES_REPORT))
                     {
-                        var userPerson = ValidControl.getPerson();
-                        menuPeriod(person, userPerson);
+                        var userPerson = ValidControl.GetPerson();
+                        MenuPeriod(person, userPerson);
                     }
-                    topMenu(person);
+                    TopMenu(person);
                     break;
                 case 5:
-                    List<Person> listPerson = LoadFromJson<Person>.getListJson(FilePath.LIST_EMPLOYEES);
-                    loginMenu(listPerson);
+                    List<Person> listPerson = LoadFromJson<Person>.GetListJson(FilePath.LIST_EMPLOYEES);
+                    LoginMenu(listPerson);
                     break;
                 case 6:
                     Environment.Exit(0);
@@ -98,10 +98,10 @@ namespace SalaryCalc
 
         }
 
-        private void workerMenu(Person person)
+        private void WorkerMenu(Person person)
         {
             Console.Clear();
-            headMenu(person);
+            HeadMenu(person);
             Console.WriteLine(
                 "\tВыберите желаемое действие:\n" +
                 "\t(1).Добавить отработаные часы\n" +
@@ -119,23 +119,23 @@ namespace SalaryCalc
             switch (value)
             {
                 case 1:
-                    WorkerFunc.addWorkTime(person);
-                    done();
-                    topMenu(person);
+                    WorkerFunc.AddWorkTime(person);
+                    Done();
+                    TopMenu(person);
                     break;
                 case 2:
-                    if (ValidControl.isFileCreate(FilePath.LIST_EMPLOYEES_REPORT))
+                    if (ValidControl.IsFileCreate(FilePath.LIST_EMPLOYEES_REPORT))
                     {
-                        Console.WriteLine($"Количество отработанных часов за месяц: {WorkerFunc.getWorkTime(person)}");
-                        Console.WriteLine($"Заработная плата за месяц: {WorkerFunc.getSalary(person)} \n");
+                        Console.WriteLine($"Количество отработанных часов за месяц: {WorkerFunc.GetWorkTime(person)}");
+                        Console.WriteLine($"Заработная плата за месяц: {WorkerFunc.GetSalary(person)} \n");
                         Console.WriteLine("Для возврата нажмите любую клавишу...");
-                        done();
+                        Done();
                     }                    
-                    topMenu(person);
+                    TopMenu(person);
                     break;
                 case 3:
-                    List<Person> listPerson = LoadFromJson<Person>.getListJson(FilePath.LIST_EMPLOYEES);
-                    loginMenu(listPerson);
+                    List<Person> listPerson = LoadFromJson<Person>.GetListJson(FilePath.LIST_EMPLOYEES);
+                    LoginMenu(listPerson);
                     break;
                 case 4:
                     Environment.Exit(0);
@@ -146,9 +146,9 @@ namespace SalaryCalc
 
         }
 
-        private void freelancerMenu(Person person)
+        private void FreelancerMenu(Person person)
         {
-            headMenu(person);
+            HeadMenu(person);
             Console.WriteLine(
                 "\tВыберите желаемое действие:\n" +
                 "\t(1).Добавить отработаные часы(не ранее чем за два дня от текущего времени)\n" +
@@ -164,19 +164,19 @@ namespace SalaryCalc
             switch (value)
             {
                 case 1:
-                    Freelancer.addWorkTime(person);
-                    done();
-                    topMenu(person);
+                    Freelancer.AddWorkTime(person);
+                    Done();
+                    TopMenu(person);
                     break;
                 case 2:
-                    if (ValidControl.isFileCreate(FilePath.LIST_EMPLOYEES_REPORT))
+                    if (ValidControl.IsFileCreate(FilePath.LIST_EMPLOYEES_REPORT))
                     {
-                        Console.WriteLine($"Количество отработанных часов за месяц: {WorkerFunc.getWorkTime(person)}");
-                        Console.WriteLine($"Заработная плата за месяц: {WorkerFunc.getSalary(person)} \n");
+                        Console.WriteLine($"Количество отработанных часов за месяц: {WorkerFunc.GetWorkTime(person)}");
+                        Console.WriteLine($"Заработная плата за месяц: {WorkerFunc.GetSalary(person)} \n");
                         Console.WriteLine("Для возврата нажмите любую клавишу...");
-                        done();
+                        Done();
                     }                    
-                    topMenu(person);
+                    TopMenu(person);
                     break;
                 case 3:
                     Environment.Exit(0);
@@ -187,9 +187,9 @@ namespace SalaryCalc
 
         }
 
-        private void menuPeriodAllPerson(Person person)
+        private void MenuPeriodAllPerson(Person person)
         {
-            headMenu(person);
+            HeadMenu(person);
             Console.WriteLine(
                 "\tВыберите желаемый период:\n" +
                 "\t(1).День\n" +
@@ -209,34 +209,34 @@ namespace SalaryCalc
             switch (value)
             {
                 case 1:                    
-                    ManagerFunc.getWorkInfo(Convert.ToDateTime(DateTime.Now.ToShortDateString()));
-                    done();
-                    topMenu(person);
+                    ManagerFunc.GetWorkInfo(Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                    Done();
+                    TopMenu(person);
                     break;
                 case 2:
                     var weak = new TimeSpan(7, 0, 0, 0);
                     var weakAgo = Convert.ToDateTime(DateTime.Now - weak);
-                    ManagerFunc.getWorkInfo(weakAgo);
-                    done();
-                    topMenu(person);
+                    ManagerFunc.GetWorkInfo(weakAgo);
+                    Done();
+                    TopMenu(person);
                     break;
                 case 3:
                     var month = new TimeSpan(DateTime.Now.Day, 0, 0, 0);
                     var monthAgo = Convert.ToDateTime(DateTime.Now - month);
-                    ManagerFunc.getWorkInfo(monthAgo);
-                    done();
-                    topMenu(person);
+                    ManagerFunc.GetWorkInfo(monthAgo);
+                    Done();
+                    TopMenu(person);
                     break;
                 case 4:
-                    getUserPeriod(out DateTime StartTime,out DateTime EndTime);
-                    ManagerFunc.getWorkInfo(StartTime, EndTime);
-                    done();
-                    topMenu(person);
+                    GetUserPeriod(out DateTime StartTime,out DateTime EndTime);
+                    ManagerFunc.GetWorkInfo(StartTime, EndTime);
+                    Done();
+                    TopMenu(person);
                     break;
                 case 5:
-                    ManagerFunc.getWorkInfo();
-                    done();
-                    topMenu(person);
+                    ManagerFunc.GetWorkInfo();
+                    Done();
+                    TopMenu(person);
                     break;
                 case 6:
                     Environment.Exit(0);
@@ -247,9 +247,9 @@ namespace SalaryCalc
 
         }
 
-        private void menuPeriod(Person person, Person userPerson)
+        private void MenuPeriod(Person person, Person userPerson)
         {
-            headMenu(person);
+            HeadMenu(person);
             Console.WriteLine($"Отчет по {userPerson.name} {userPerson.secondName}");
             Console.WriteLine(
                  "\tВыберите желаемый период:\n" +
@@ -270,34 +270,34 @@ namespace SalaryCalc
             {
                 case 1:
                     Console.WriteLine();
-                    ManagerFunc.getWorkInfo(Convert.ToDateTime(DateTime.Now.ToShortDateString()), userPerson);
-                    done();
-                    topMenu(person);
+                    ManagerFunc.GetWorkInfo(Convert.ToDateTime(DateTime.Now.ToShortDateString()), userPerson);
+                    Done();
+                    TopMenu(person);
                     break;
                 case 2:
                     var weak = new TimeSpan(7, 0, 0, 0);
                     var weakAgo = Convert.ToDateTime(DateTime.Now - weak);
-                    ManagerFunc.getWorkInfo(weakAgo, userPerson);
-                    done();
-                    topMenu(person);
+                    ManagerFunc.GetWorkInfo(weakAgo, userPerson);
+                    Done();
+                    TopMenu(person);
                     break;
                 case 3:
                     var month = new TimeSpan(DateTime.Now.Day, 0, 0, 0);
                     var monthAgo = Convert.ToDateTime(DateTime.Now - month);
-                    ManagerFunc.getWorkInfo(monthAgo, userPerson);
-                    done();
-                    topMenu(person);
+                    ManagerFunc.GetWorkInfo(monthAgo, userPerson);
+                    Done();
+                    TopMenu(person);
                     break;
                 case 4:
-                    getUserPeriod(out DateTime StartTime, out DateTime EndTime);
-                    ManagerFunc.getWorkInfo(StartTime, EndTime, userPerson);
-                    done();
-                    topMenu(person);
+                    GetUserPeriod(out DateTime StartTime, out DateTime EndTime);
+                    ManagerFunc.GetWorkInfo(StartTime, EndTime, userPerson);
+                    Done();
+                    TopMenu(person);
                     break;
                 case 5:
-                    ManagerFunc.getWorkInfo(userPerson);
-                    done();
-                    topMenu(person);
+                    ManagerFunc.GetWorkInfo(userPerson);
+                    Done();
+                    TopMenu(person);
                     break;
                 case 6:
                     Environment.Exit(0);
@@ -308,25 +308,21 @@ namespace SalaryCalc
 
         }
 
-        private void getUserPeriod(out DateTime StartTime, out DateTime EndTime)
+        private void GetUserPeriod(out DateTime StartTime, out DateTime EndTime)
         {
             Console.Write("Укажите дату начала периода в формате дд.мм.гггг: ");
-
             //TODO: Проверить ввод пользователя.
 
             StartTime = Convert.ToDateTime(Console.ReadLine());
-
             Console.Write("Укажите дату окончания периода в формате дд.мм.гггг: ");
-
             //TODO: Проверить ввод пользователя.
 
             EndTime = Convert.ToDateTime(Console.ReadLine());
-
             Console.WriteLine();
 
         }
 
-        private void headMenu(Person person)
+        private void HeadMenu(Person person)
         {
             Console.Clear();
             Console.WriteLine($"");
@@ -338,7 +334,7 @@ namespace SalaryCalc
             Console.WriteLine($"----------------------------------------");
             Console.ForegroundColor = ConsoleColor.White;
         }
-        private void done()
+        private void Done()
         {
             Console.WriteLine("--------Далее---------");            
             Console.ReadKey();

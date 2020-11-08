@@ -7,8 +7,8 @@ namespace SalaryCalc
 {
     class FilePath
     {
-        public static string FILE_PATH = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
-        public static string LIST_EMPLOYEES = FILE_PATH + @"\..\employees.json";        
-        public static string LIST_EMPLOYEES_REPORT = FILE_PATH + @"\..\employees_report.json";
+        public static readonly string FILE_PATH = Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()));
+        public static readonly string LIST_EMPLOYEES = FILE_PATH + @"\..\employees.json";        
+        public static readonly string LIST_EMPLOYEES_REPORT = FILE_PATH + @"\..\employees_report.json";
     }
 }

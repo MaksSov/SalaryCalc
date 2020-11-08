@@ -8,9 +8,9 @@ namespace SalaryCalc
 {
     class ValidControl
     { 
-        public static bool isPerson(List<Person> listPerson, Person person)
+        public static bool IsPerson(List<Person> listPerson, Person person)
         {
-            try
+            if (listPerson != null)
             {
                 foreach (var user in listPerson)
                 {
@@ -20,17 +20,13 @@ namespace SalaryCalc
                     }
                 }
             }
-            catch (NullReferenceException)
-            {
-                return false;                
-            }
-
-            return false;
+            return false;           
+            
         }
     
-        public static bool isPerson(List<Person> listPerson, string name, string secondName)
+        public static bool IsPerson(List<Person> listPerson, string name, string secondName)
         {
-            try
+            if (listPerson != null)
             {
                 foreach (var user in listPerson)
                 {
@@ -40,26 +36,21 @@ namespace SalaryCalc
                     }
                 }
             }
-            catch (NullReferenceException)
-            {
-                return false;
-            }
-
             return false;
         }
 
-        public static Person getPerson()
+        public static Person GetPerson()
         {
-            List<Person> listPerson = LoadFromJson<Person>.getListJson(FilePath.LIST_EMPLOYEES);
+            List<Person> listPerson = LoadFromJson<Person>.GetListJson(FilePath.LIST_EMPLOYEES);
             Console.Write("Введите Имя: ");
             var loginName = Console.ReadLine();
             Console.Write("Введите Фамилию: ");
             var loginSecondName = Console.ReadLine();
-            return ValidControl.getPerson(listPerson, loginName, loginSecondName);            
+            return ValidControl.GetPerson(listPerson, loginName, loginSecondName);            
 
         }
 
-        public static Person getPerson(List<Person> listPerson, string name, string secondName)
+        public static Person GetPerson(List<Person> listPerson, string name, string secondName)
         {
             foreach (var user in listPerson)
             {
@@ -77,17 +68,8 @@ namespace SalaryCalc
             return default(Person);
 
         }
-       
-        public static bool isManager(Person person)
-        {
-            if (person.position == Position.Manager)
-            {
-                return true;
-            }
-            return false;
-        }
 
-        public static void fileEmployeedCreate()
+        public static void CreatedFileEmployees()
         {
             if (!File.Exists(FilePath.LIST_EMPLOYEES))
             {
@@ -106,7 +88,7 @@ namespace SalaryCalc
             
         }
 
-        public static bool isFileCreate(string path)
+        public static bool IsFileCreate(string path)
         {
             if (!File.Exists(path))
             {

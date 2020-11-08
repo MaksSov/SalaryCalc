@@ -8,13 +8,11 @@ namespace SalaryCalc
 {
     class Freelancer
     {
-        public static void addWorkTime(Person person)
+        public static void AddWorkTime(Person person)
         {
-
             //TODO:Добавить проверку ввода данных
 
             Console.WriteLine("Введите дату в формате дд.мм.гггг");
-
             var userTime = Convert.ToDateTime(Console.ReadLine());
             var twoDays = new TimeSpan(7, 0, 0, 0);
             var twoDaysAgo = Convert.ToDateTime(DateTime.Now - twoDays);
@@ -22,14 +20,10 @@ namespace SalaryCalc
             if (userTime < twoDaysAgo)
             {
                 Console.WriteLine("Введите количетсво отработанных часов: ");
-
                 var workHours = int.Parse(Console.ReadLine());
 
                 Console.WriteLine("Добавьте коментарий о проделаной работе");
-
                 var coments = Console.ReadLine();
-
-
 
                 var workDay = new HoursWorked { person = person, workDay = userTime, workHours = workHours, coments = coments };
 
@@ -40,9 +34,8 @@ namespace SalaryCalc
 
                 }
             }
-
             Console.WriteLine("Вы ввели неправильную дату");
-          
+
         }
     }
 }

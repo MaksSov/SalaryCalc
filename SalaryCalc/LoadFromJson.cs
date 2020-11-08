@@ -9,14 +9,13 @@ namespace SalaryCalc
     static class LoadFromJson
         <T>
     {
-        public static List<T> getListJson(string filePath)
+        public static List<T> GetListJson(string filePath)
         {
             List<T> listPerson = new List<T>();
 
             using (var file = new StreamReader(filePath))
             {
                 string line;
-
                 while ((line = file.ReadLine()) != null)
                 {
 

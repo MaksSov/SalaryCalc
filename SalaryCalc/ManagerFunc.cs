@@ -8,7 +8,7 @@ namespace SalaryCalc
 {
     class ManagerFunc : WorkerFunc
     {
-        public static void addPersonal()
+        public static void AddPersonal()
         {
 
             //TODO: Добавить проверку ввода данных
@@ -33,7 +33,7 @@ namespace SalaryCalc
             }
         }
 
-        public static void addPersonal(string name, string secondName, Position position)
+        public static void AddPersonal(string name, string secondName, Position position)
         {
             //TODO: Добавить проверку ввода данных
             var person = new Person(name, secondName, position);
@@ -44,10 +44,9 @@ namespace SalaryCalc
             }
         }
 
-        public static void getWorkInfo()
+        public static void GetWorkInfo()
         {
-
-            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_EMPLOYEES_REPORT);
+            var listHoursWorked = LoadFromJson<HoursWorked>.GetListJson(FilePath.LIST_EMPLOYEES_REPORT);
 
             foreach (var item in listHoursWorked)
             {               
@@ -56,10 +55,10 @@ namespace SalaryCalc
 
         }
 
-        public static void getWorkInfo(Person person)
+        public static void GetWorkInfo(Person person)
         {
 
-            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_EMPLOYEES_REPORT);
+            var listHoursWorked = LoadFromJson<HoursWorked>.GetListJson(FilePath.LIST_EMPLOYEES_REPORT);
 
             foreach (var item in listHoursWorked)
             {
@@ -75,10 +74,10 @@ namespace SalaryCalc
             }
         }
 
-        public static void getWorkInfo(DateTime EndDate)
+        public static void GetWorkInfo(DateTime EndDate)
         {
 
-            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_EMPLOYEES_REPORT);
+            var listHoursWorked = LoadFromJson<HoursWorked>.GetListJson(FilePath.LIST_EMPLOYEES_REPORT);
 
             foreach (var item in listHoursWorked)
             {
@@ -94,10 +93,10 @@ namespace SalaryCalc
             }
         }
 
-        public static void getWorkInfo(DateTime EndDate, Person person)
+        public static void GetWorkInfo(DateTime EndDate, Person person)
         {
             
-            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_EMPLOYEES_REPORT);
+            var listHoursWorked = LoadFromJson<HoursWorked>.GetListJson(FilePath.LIST_EMPLOYEES_REPORT);
 
             foreach (var item in listHoursWorked)
             {
@@ -113,10 +112,10 @@ namespace SalaryCalc
             }
         }
 
-        public static void getWorkInfo(DateTime StartDate, DateTime EndDate)
+        public static void GetWorkInfo(DateTime StartDate, DateTime EndDate)
         {
 
-            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_EMPLOYEES_REPORT);
+            var listHoursWorked = LoadFromJson<HoursWorked>.GetListJson(FilePath.LIST_EMPLOYEES_REPORT);
 
             foreach (var item in listHoursWorked)
             {
@@ -132,10 +131,10 @@ namespace SalaryCalc
             }
         }
 
-        public static void getWorkInfo(DateTime StartDate, DateTime EndDate , Person person)
+        public static void GetWorkInfo(DateTime StartDate, DateTime EndDate , Person person)
         {
 
-            var listHoursWorked = LoadFromJson<HoursWorked>.getListJson(FilePath.LIST_EMPLOYEES_REPORT);
+            var listHoursWorked = LoadFromJson<HoursWorked>.GetListJson(FilePath.LIST_EMPLOYEES_REPORT);
 
             foreach (var item in listHoursWorked)
             {
