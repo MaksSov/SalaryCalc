@@ -239,8 +239,16 @@ namespace SalaryCalc
                     TopMenu(person);
                     break;
                 case 4:
-                    GetUserPeriod(out DateTime StartTime,out DateTime EndTime);
-                    ManagerFunc.GetWorkInfo(StartTime, EndTime);
+                    if (GetUserPeriod(out DateTime StartTime, out DateTime EndTime))
+                    {
+                        ManagerFunc.GetWorkInfo(StartTime, EndTime);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Возврат в предыдущее меню");
+                        Done();
+                        MenuPeriodAllPerson(person);
+                    }                    
                     Done();
                     TopMenu(person);
                     break;
@@ -319,19 +327,35 @@ namespace SalaryCalc
 
         }
 
-        private void GetUserPeriod(out DateTime StartTime, out DateTime EndTime)
+        public bool GetUserPeriod(out DateTime StartTime, out DateTime EndTime)
         {
-            Console.Write("Укажите дату начала периода в формате дд.мм.гггг: ");
-            //TODO: Проверить ввод пользователя.
+            StartTime = default;
+            EndTime = default;
+            try
+            {
+                Console.Write("Укажите дату начала периода в формате дд.мм.гггг: ");
+                StartTime = Convert.ToDateTime(Console.ReadLine());
+                Console.Write("Укажите дату окончания периода в формате дд.мм.гггг: ");
+                EndTime = Convert.ToDateTime(Console.ReadLine());
+                Console.WriteLine();
+                
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Вы ввели некорректные данные");                
+                return false;
+            }
 
-            StartTime = Convert.ToDateTime(Console.ReadLine());
-            Console.Write("Укажите дату окончания периода в формате дд.мм.гггг: ");
-            //TODO: Проверить ввод пользователя.
-
-            EndTime = Convert.ToDateTime(Console.ReadLine());
-            Console.WriteLine();
-
+            if (StartTime > EndTime)
+            {
+                Console.WriteLine("Неправильная последовательность дат");
+                return false;
+            }
+            return true;
+           
         }
+
+        
 
         private void HeadMenu(Person person)
         {

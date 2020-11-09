@@ -46,55 +46,59 @@ namespace SalaryCalc
 
         public static void GetWorkInfo()
         {
-            var listHoursWorked = LoadFromJson<HoursWorked>.GetListJson(FilePath.LIST_EMPLOYEES_REPORT);            
+            var listHoursWorked = LoadFromJson<HoursWorked>.GetListJson(FilePath.LIST_EMPLOYEES_REPORT);
+            HoursWorked checkEmpety = default;
             foreach (var item in listHoursWorked)
             {               
                 Console.WriteLine(item);
-            }            
+            }
+            if (checkEmpety == default)
+            {
+                Console.WriteLine("Нет данных");
+                Console.WriteLine();
+            }
         }
 
         public static void GetWorkInfo(Person person)
         {
-
             var listHoursWorked = LoadFromJson<HoursWorked>.GetListJson(FilePath.LIST_EMPLOYEES_REPORT);
-
+            HoursWorked checkEmpety = default;
             foreach (var item in listHoursWorked)
             {
                 if (person.name == item.person.name && person.secondName == item.person.secondName)
                 {
                     Console.WriteLine(item);
-                }
-                else
-                {
-                    Console.WriteLine("Нет данных");
-                    Console.WriteLine();
-                }
+                }                
+            }
+            if (checkEmpety == default)
+            {
+                Console.WriteLine("Нет данных");
+                Console.WriteLine();
             }
         }
 
         public static void GetWorkInfo(DateTime EndDate)
         {
-
             var listHoursWorked = LoadFromJson<HoursWorked>.GetListJson(FilePath.LIST_EMPLOYEES_REPORT);
-
+            HoursWorked checkEmpety = default;
             foreach (var item in listHoursWorked)
             {
                 if (EndDate.CompareTo(item.workDay) == -1 || EndDate.CompareTo(item.workDay) == 0)
                 {
                     Console.WriteLine(item);
                 }
-                else
-                {
-                    Console.WriteLine("Нет данных");
-                    Console.WriteLine();
-                }
+            }
+            if (checkEmpety == default)
+            {
+                Console.WriteLine("Нет данных");
+                Console.WriteLine();
             }
         }
 
         public static void GetWorkInfo(DateTime EndDate, Person person)
         {
-            
             var listHoursWorked = LoadFromJson<HoursWorked>.GetListJson(FilePath.LIST_EMPLOYEES_REPORT);
+            HoursWorked checkEmpety = default;
 
             foreach (var item in listHoursWorked)
             {
@@ -102,48 +106,49 @@ namespace SalaryCalc
                 {
                     Console.WriteLine(item);
                 }
-                else
-                {
-                    Console.WriteLine("Нет данных");
-                    Console.WriteLine();
-                }
+            }
+            if (checkEmpety == default)
+            {
+                Console.WriteLine("Нет данных");
+                Console.WriteLine();
             }
         }
 
         public static void GetWorkInfo(DateTime StartDate, DateTime EndDate)
         {
-
             var listHoursWorked = LoadFromJson<HoursWorked>.GetListJson(FilePath.LIST_EMPLOYEES_REPORT);
+            HoursWorked checkEmpety = default;
 
             foreach (var item in listHoursWorked)
             {
                 if (StartDate <= item.workDay && EndDate >= item.workDay )
                 {
+                    checkEmpety = item;
                     Console.WriteLine(item);
                 }
-                else
-                {
-                    Console.WriteLine("Нет данных");
-                    Console.WriteLine();
-                }
+            }
+            if (checkEmpety == default)
+            {
+                Console.WriteLine("Нет данных");
+                Console.WriteLine();
             }
         }
 
         public static void GetWorkInfo(DateTime StartDate, DateTime EndDate , Person person)
         {
-
-            var listHoursWorked = LoadFromJson<HoursWorked>.GetListJson(FilePath.LIST_EMPLOYEES_REPORT);            
+            var listHoursWorked = LoadFromJson<HoursWorked>.GetListJson(FilePath.LIST_EMPLOYEES_REPORT);
+            HoursWorked checkEmpety = default;
             foreach (var item in listHoursWorked)
             {
                 if (StartDate <= item.workDay && EndDate >= item.workDay && person == item.person)
                 {
                     Console.WriteLine(item);
                 }
-                else
-                {
-                    Console.WriteLine("Нет данных");
-                    Console.WriteLine();
-                }
+            }
+            if (checkEmpety == default)
+            {
+                Console.WriteLine("Нет данных");
+                Console.WriteLine();
             }
         }
 
