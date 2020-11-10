@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace SalaryCalc
 {
@@ -10,39 +11,44 @@ namespace SalaryCalc
     {
         public static void AddPersonal()
         {
-
-            //TODO: Добавить проверку ввода данных
+            var listPerson = LoadFromJson<Person>.GetListJson(FilePath.LIST_EMPLOYEES);
+            var regexName = new Regex(@"^[A-Z][a-z]*$");
 
             Console.WriteLine();
             Console.Write("Введите имя нового сотрудника: ");
             var name = Console.ReadLine();
+
             Console.Write("Введите фамилию нового сотрудника: ");
             var secondName = Console.ReadLine();
-            Console.Write("Введите должность нового сотрудника: \n" +
-                "\t\t 0 - Руководитель \n" +
-                "\t\t 1 - Штатный сотрудник  \n" +
-                "\t\t 2 - Фриланс \n");
-            int.TryParse(Console.ReadLine(), out int value);
-            
 
-            var person = new Person(name, secondName, (Position)value);
-
-            using (var file = new StreamWriter(FilePath.LIST_EMPLOYEES, true))
+            if (regexName.IsMatch(name) && regexName.IsMatch(secondName) && !ValidControl.IsPerson(listPerson, name, secondName))
             {
-                file.WriteLine(JsonSerializer.Serialize(person));
+                Console.Write("Введите должность нового сотрудника: \n" +
+                    "\t\t 0 - Руководитель \n" +
+                    "\t\t 1 - Штатный сотрудник  \n" +
+                    "\t\t 2 - Фриланс \n");
+                int.TryParse(Console.ReadLine(), out int value);
+                if (value > 0 && value < 2)
+                {
+                    var person = new Person(name, secondName, (Position)value);
+                    using (var file = new StreamWriter(FilePath.LIST_EMPLOYEES, true))
+                    {
+                        file.WriteLine(JsonSerializer.Serialize(person));
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Должность сотрудника введена некорректно");
+                }
+             
             }
-        }
-
-        public static void AddPersonal(string name, string secondName, Position position)
-        {
-            //TODO: Добавить проверку ввода данных
-            var person = new Person(name, secondName, position);
-
-            using (var file = new StreamWriter(FilePath.LIST_EMPLOYEES, true))
+            else
             {
-                file.Write(JsonSerializer.Serialize(person));
+                Console.WriteLine("Сотрудник есть в базе или фамилия,имя введены не коректно");
             }
+           
         }
+       
 
         public static void GetWorkInfo()
         {

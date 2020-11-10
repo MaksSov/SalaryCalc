@@ -106,7 +106,7 @@ namespace SalaryCalc
                 default:
                     break;
             }
-
+            ManagerMenu(person);
         }
 
         private void WorkerMenu(Person person)
@@ -269,9 +269,13 @@ namespace SalaryCalc
         private void MenuPeriod(Person person, Person userPerson)
         {
             HeadMenu(person);
-            Console.WriteLine($"Отчет по {userPerson.name} {userPerson.secondName}");
+            Console.Write($"Отчет по: ");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write($"{userPerson.name} {userPerson.secondName}");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine();
             Console.WriteLine(
-                 "\tВыберите желаемый период:\n" +
+                 "\n\tВыберите желаемый период:\n" +
                 "\t(1).День\n" +
                 "\t(2).Неделя\n" +
                 "\t(3).Месяц\n" +
@@ -308,8 +312,15 @@ namespace SalaryCalc
                     TopMenu(person);
                     break;
                 case 4:
-                    GetUserPeriod(out DateTime StartTime, out DateTime EndTime);
-                    ManagerFunc.GetWorkInfo(StartTime, EndTime, userPerson);
+                    if (GetUserPeriod(out DateTime StartTime, out DateTime EndTime))
+                    {
+                        ManagerFunc.GetWorkInfo(StartTime, EndTime);
+                    }
+                    else
+                    {
+                        Done();
+                        MenuPeriod(person,userPerson);
+                    }
                     Done();
                     TopMenu(person);
                     break;

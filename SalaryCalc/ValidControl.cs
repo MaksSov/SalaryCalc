@@ -20,8 +20,7 @@ namespace SalaryCalc
                     }
                 }
             }
-            return false;           
-            
+            return false;
         }
     
         public static bool IsPerson(List<Person> listPerson, string name, string secondName)
@@ -32,6 +31,7 @@ namespace SalaryCalc
                 {
                     if (name == user.name && secondName == user.secondName)
                     {
+
                         return true;
                     }
                 }

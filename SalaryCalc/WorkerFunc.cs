@@ -11,32 +11,36 @@ namespace SalaryCalc
 
         public static void AddWorkTime(Person person)
         {
-            //TODO:Добавить проверку ввода данных
-
-            Console.WriteLine("Введите дату в формате дд.мм.гггг");
-            var userTime = Convert.ToDateTime(Console.ReadLine());
-            var month = new TimeSpan(DateTime.Now.Day, 0, 0, 0);
-            var twoDaysAgo = Convert.ToDateTime(DateTime.Now - month);
-
-            if (userTime > twoDaysAgo)
+            try
             {
-                Console.WriteLine("Введите количетсво отработанных часов: ");
-                var workHours = int.Parse(Console.ReadLine());
-                Console.WriteLine("Добавьте коментарий о проделаной работе");
-                var coments = Console.ReadLine();
-
-                var workDay = new HoursWorked { person = person, workDay = userTime, workHours = workHours, coments = coments };
-
-                using (var file = new StreamWriter(FilePath.LIST_EMPLOYEES_REPORT, true, Encoding.UTF8))
+                Console.WriteLine("Введите дату в формате дд.мм.гггг");
+                var userTime = Convert.ToDateTime(Console.ReadLine());
+                var month = new TimeSpan(DateTime.Now.Day, 0, 0, 0);
+                var monthAgo = Convert.ToDateTime(DateTime.Now - month);
+                if (userTime > monthAgo)
                 {
+                    Console.WriteLine("Введите количетсво отработанных часов: ");
+                    var workHours = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Добавьте коментарий о проделаной работе");
+                    var coments = Console.ReadLine();
 
-                    file.WriteLine(JsonSerializer.Serialize(workDay));
+                    var workDay = new HoursWorked { person = person, workDay = userTime, workHours = workHours, coments = coments };
 
+                    using (var file = new StreamWriter(FilePath.LIST_EMPLOYEES_REPORT, true, Encoding.UTF8))
+                    {
+                        file.WriteLine(JsonSerializer.Serialize(workDay));
+                    }                    
+                }
+                else
+                {
+                    Console.WriteLine("Дата должна быть текущего месяца");
                 }
             }
 
-            else{Console.WriteLine("Вы ввели неправильную дату. Дата должна быть текущего месяца");            }
-
+            catch (FormatException)
+            {
+                Console.WriteLine("Неверный формат времени");
+            }
         }
 
         public static int GetWorkTime(Person person)
